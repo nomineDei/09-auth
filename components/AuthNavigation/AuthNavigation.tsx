@@ -1,9 +1,20 @@
+"use client";
+
 import Link from "next/link";
 import css from "./AuthNavigation.module.css";
 import { useAuth } from "@/store/authStore";
+import { useRouter } from "next/navigation";
+import { logout } from "@/lib/api/clientApi";
 
 const AuthNavigation = () => {
   const { isAuth, user, clearAuth } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logout();
+    clearAuth();
+    router.push("/sign-in");
+  };
 
   return (
     <>
@@ -21,7 +32,7 @@ const AuthNavigation = () => {
 
           <li className={css.navigationItem}>
             <p className={css.userEmail}>{user?.email}</p>
-            <button className={css.logoutButton} onClick={clearAuth}>
+            <button className={css.logoutButton} onClick={handleLogout}>
               Logout
             </button>
           </li>

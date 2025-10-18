@@ -19,6 +19,8 @@ const AuthProvider = ({ children }: Props) => {
         const user = await getMe();
         if (user) {
           setUser(user);
+        } else {
+          clearAuth();
         }
       } else clearAuth();
     };

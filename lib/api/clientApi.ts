@@ -75,7 +75,7 @@ export async function getMe() {
   return res.data;
 }
 
-export async function updateMe(data: { name?: string; avatarUrl?: string }) {
+export async function updateMe(data: { username?: string }) {
   const res = await api.patch("/users/me", data);
   return res.data;
 }

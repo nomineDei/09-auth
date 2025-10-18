@@ -33,7 +33,7 @@ export const fetchServerNoteById = async (id: string): Promise<Note> => {
 
 export const getServerMe = async (): Promise<User> => {
   const cookieStore = await cookies();
-  const { data } = await api.get("/auth/me", {
+  const { data } = await api.get("/users/me", {
     headers: {
       Cookie: cookieStore.toString(),
     },
