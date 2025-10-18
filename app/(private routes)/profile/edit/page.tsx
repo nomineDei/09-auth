@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/store/authStore";
+import { useAuth } from "@/lib/store/authStore";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote, CreateNoteParams } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
-import { useNoteStore, initialDraft } from "@/store/noteStore";
+import { useNoteStore, initialDraft } from "@/lib/store/noteStore";
 
 const validTags: readonly CreateNoteParams["tag"][] = [
   "Todo",

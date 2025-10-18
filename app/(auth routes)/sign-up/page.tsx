@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { register, RegisterRequest } from "@/lib/api/clientApi";
 import css from "./SignUpPage.module.css";
-import { useAuth } from "@/store/authStore";
+import { useAuth } from "@/lib/store/authStore";
 import { useState } from "react";
 
 const SignUp = () => {
