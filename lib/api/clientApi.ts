@@ -1,9 +1,19 @@
 import type { Note } from "@/types/note";
 import { api } from "./api";
+import { User } from "@/types/user";
 
 export interface RegisterRequest {
   email: string;
   password: string;
+}
+
+export interface AuthResponse {
+  user: User;
+}
+
+export interface SessionResponse {
+  isAuthenticated: boolean;
+  user?: User;
 }
 
 export interface NotesResponse {
@@ -50,32 +60,35 @@ export const deleteNote = async (id: string): Promise<Note> => {
   return res.data;
 };
 
-export async function register(data: { email: string; password: string }) {
-  const res = await api.post("/auth/register", data);
+export async function register(data: RegisterRequest): Promise<AuthResponse> {
+  const res = await api.post<AuthResponse>("/auth/register", data);
   return res.data;
 }
 
-export async function login(data: { email: string; password: string }) {
-  const res = await api.post("/auth/login", data);
+export async function login(data: {
+  email: string;
+  password: string;
+}): Promise<AuthResponse> {
+  const res = await api.post<AuthResponse>("/auth/login", data);
   return res.data;
 }
 
-export async function logout() {
-  const res = await api.post("/auth/logout");
+export async function logout(): Promise<{ message: string }> {
+  const res = await api.post<{ message: string }>("/auth/logout");
   return res.data;
 }
 
-export async function checkSession() {
-  const res = await api.get("/auth/session");
+export async function checkSession(): Promise<SessionResponse> {
+  const res = await api.get<SessionResponse>("/auth/session");
   return res.data;
 }
 
-export async function getMe() {
-  const res = await api.get("/users/me");
+export async function getMe(): Promise<User> {
+  const res = await api.get<User>("/users/me");
   return res.data;
 }
 
-export async function updateMe(data: { username?: string }) {
-  const res = await api.patch("/users/me", data);
+export async function updateMe(data: { username?: string }): Promise<User> {
+  const res = await api.patch<User>("/users/me", data);
   return res.data;
 }

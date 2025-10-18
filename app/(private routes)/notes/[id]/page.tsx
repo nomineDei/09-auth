@@ -1,4 +1,4 @@
-import { fetchNoteById } from "@/lib/api/clientApi";
+import { fetchServerNoteById } from "@/lib/api/serverApi";
 import {
   dehydrate,
   HydrationBoundary,
@@ -12,7 +12,7 @@ export async function generateMetadata({
 }: NotePageProps): Promise<Metadata> {
   const { id } = await params;
 
-  const note = await fetchNoteById(id);
+  const note = await fetchServerNoteById(id);
 
   const title = note.title || "Note Details — NoteHub";
   const description = note.content
@@ -51,7 +51,7 @@ const NotePage = async ({ params }: NotePageProps) => {
 
   await queryClient.prefetchQuery({
     queryKey: ["note", id],
-    queryFn: () => fetchNoteById(id),
+    queryFn: () => fetchServerNoteById(id),
   });
 
   return (

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/lib/api/clientApi";
 
 const AuthNavigation = () => {
-  const { isAuth, user, clearAuth } = useAuth();
+  const { isAuthenticated, user, clearAuth } = useAuth();
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -18,7 +18,7 @@ const AuthNavigation = () => {
 
   return (
     <>
-      {isAuth ? (
+      {isAuthenticated ? (
         <>
           <li className={css.navigationItem}>
             <Link

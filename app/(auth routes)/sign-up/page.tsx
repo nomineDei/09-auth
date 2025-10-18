@@ -15,8 +15,8 @@ const SignUp = () => {
     const payload = Object.fromEntries(formData) as unknown as RegisterRequest;
 
     try {
-      const user = await register(payload);
-      setUser(user);
+      const res = await register(payload);
+      setUser(res?.user);
       router.replace("/profile");
     } catch (err: unknown) {
       if (err instanceof Error) {

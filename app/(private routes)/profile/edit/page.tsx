@@ -50,12 +50,13 @@ const EditProfile = () => {
 
         <form className={css.profileInfo} onSubmit={handleSave}>
           <div className={css.usernameWrapper}>
-            <label htmlFor="username">Username:{user?.username}</label>
+            <label htmlFor="username">Username:</label>
             <input
               id="username"
               type="text"
               className={css.input}
               onChange={(e) => setUsername(e.target.value)}
+              value={username}
             />
           </div>
 

@@ -21,8 +21,8 @@ const SignIn = () => {
     } as RegisterRequest;
 
     try {
-      const user = await login(payload);
-      setUser(user);
+      const res = await login(payload);
+      setUser(res?.user);
       router.replace("/profile");
     } catch (err: unknown) {
       if (err instanceof Error) setError(err.message);
