@@ -15,6 +15,7 @@ const AuthNavigation = () => {
     clearAuth();
     router.push("/sign-in");
   };
+  console.log(user?.email);
 
   return (
     <>
