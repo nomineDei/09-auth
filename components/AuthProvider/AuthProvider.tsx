@@ -14,15 +14,32 @@ const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const fetchAuth = async () => {
-      const isAuth = await checkSession();
-      if (isAuth) {
-        const user = await getMe();
-        if (user) {
-          setUser(user);
+      try {
+        const token = document.cookie
+          .split("; ")
+          .find((c) => c.startsWith("accessToken="))
+          ?.split("=")[1];
+
+        if (!token) {
+          clearAuth();
+          return;
+        }
+
+        const isAuth = await checkSession();
+        if (isAuth) {
+          const user = await getMe();
+          if (user) {
+            setUser(user);
+          } else {
+            clearAuth();
+          }
         } else {
           clearAuth();
         }
-      } else clearAuth();
+      } catch (err) {
+        console.error("Auth error:", err);
+        clearAuth();
+      }
     };
     fetchAuth();
   }, [clearAuth, setUser]);
